@@ -29,7 +29,6 @@ sed -e 's|PATH="\(.*\)"|PATH="/usr/share/dse/bin:/usr/share/dse/tools/bin:\1"|g'
 #
 
 # start DDAC on node
-#su cassandra -c "/usr/share/dse/bin/cassandra" 
 cp /home/ddac/ddac-azure-install/cassandra.service /etc/systemd/system
 systemctl enable cassandra
 systemctl start cassandra
