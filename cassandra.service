@@ -5,8 +5,8 @@ Description=Cassandra Service
 Type=forking
 PIDFile=/usr/share/dse/PID
 
-ExecStartPre=- /sbin/swapoff -a
-ExecStartPre=- /bin/chown -R cassandra /usr/share/dse
+ExecStartPre=/sbin/swapoff -a
+ExecStartPre=/bin/chown -R cassandra /usr/share/dse
 ExecStart=/usr/share/dse/bin/cassandra  -p /usr/share/dse/PID
 
 WorkingDirectory=/usr/share/dse
