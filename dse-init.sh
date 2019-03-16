@@ -12,6 +12,7 @@ chown cassandra:cassandra /usr/share/dse
 cd /usr/share/dse
 # install DDAC
 tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1
+sleep 10
 chown -R cassandra:cassandra /usr/share/dse
 # no seeds being passed in would be bad - default to private ip
 if [ -z "$seeds" ]
@@ -31,6 +32,7 @@ sed -e 's|PATH="\(.*\)"|PATH="/usr/share/dse/bin:/usr/share/dse/tools/bin:\1"|g'
 # start DDAC on node
 cp /home/ddac/ddac-azure-install/cassandra.service /etc/systemd/system
 systemctl start cassandra
+sleep 20
 echo "cassandra started"
 systemctl enable cassandra
 echo "dse-init ------> deploy-dse exit status $?"
