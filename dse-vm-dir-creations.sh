@@ -26,7 +26,7 @@ ln -s /data/cassandra/hints /var/lib/cassandra/hints
 ln -s /data/cassandra/saved_caches /var/lib/cassandra/saved_caches
 ln -s /data/cassandra/log/audit /var/log/cassandra/audit
 ln -s /data/cassandra/log /var/log/cassandra
-chmod -R 777 /data/cassandra/data
-chmod -R 777 /data/cassandra/log
 chown -R cassandra:cassandra /data/cassandra
+chmod -R ugo+rw /data/cassandra/data
+chmod -R ugo+rw /data/cassandra/log
 echo "dse-vm-dir-creation ------> exit status $?"
