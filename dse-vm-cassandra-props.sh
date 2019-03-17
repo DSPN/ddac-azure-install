@@ -50,7 +50,8 @@ sed -i 's/endpoint_snitch: SimpleSnitch/endpoint_snitch: '"$endpoint_snitch"'/' 
 # see above
 echo "auto_bootstrap: $auto_bootstrap" >> "$file1"
 echo "phi_convict_threshold: $phi_convict_threshold" >> "$file1"
-echo "data_file_directories: /var/lib/cassandra/data" >> "$file1"
+echo "data_file_directories:" >> "$file1"
+echo "- /var/lib/cassandra/data" >> "$file1"
 echo "commitlog_directory: /var/lib/cassandra/commitlog" >> "$file1"
 echo "saved_caches_directory: /var/lib/cassandra/saved_caches" >> "$file1"
 echo "hints_directory: /var/lib/cassandra/hints" >> "$file1"
