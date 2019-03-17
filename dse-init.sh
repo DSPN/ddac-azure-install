@@ -44,10 +44,18 @@ sed -e 's|PATH="\(.*\)"|PATH="/usr/share/dse/bin:/usr/share/dse/tools/bin:\1"|g'
 # start DDAC on node
 cp /home/ddac/ddac-azure-install/cassandra.service /etc/systemd/system
 
-systemctl start cassandra &
+systemctl enable cassandra
+casseenable_process_id=$!
+wait $casseenable_process_id
+echo cassenable exited with status $?
+
+echo "cassandra starting"
+systemctl start cassandra 
 cassstart_process_id=$!
 wait $cassstart_process_id
+echo cassstart exited with status $?
 
 echo "cassandra started"
-systemctl enable cassandra
+
 echo "dse-init ------> deploy-dse exit status $?"
+
