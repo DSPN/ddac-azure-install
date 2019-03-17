@@ -14,6 +14,7 @@ cd /usr/share/dse
 tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1 &
 tar_process_id=$!
 wait $tar_process_id
+echo ddactar exited with status $?
 
 chown -R cassandra:cassandra /usr/share/dse
 # no seeds being passed in would be bad - default to private ip
@@ -27,11 +28,13 @@ privip=`echo $(hostname -I)`
 /home/ddac/ddac-azure-install/dse-vm-cassandra-props.sh $seeds $cluster_name $privip &
 cprops_process_id=$!
 wait $cprops_process_id
+echo cassprops exited with status $?
 
 # set cassandra-rackdc.yaml properties
 /home/ddac/ddac-azure-install/dse-vm-rack-props.sh $dc &
 rack_process_id=$!
 wait $rack_process_id
+echo rackprops exited with status $?
 
 # 
 # update env
