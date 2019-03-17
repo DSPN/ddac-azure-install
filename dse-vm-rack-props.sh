@@ -19,6 +19,8 @@ tr -d '"')
 rack=`get_rack`
 getrack_process_id=$!
 wait $getrack_process_id
+echo getrack exited with status $?
+#
 #
 file="/usr/share/dse/conf/cassandra-rackdc.properties"
 # backup cassandra-racdc.properties
