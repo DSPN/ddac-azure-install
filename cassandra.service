@@ -2,7 +2,7 @@
 Description=Cassandra Service
 
 [Service]
-Type=forking
+Type=simple
 PIDFile=/usr/share/dse/PID
 
 ExecStartPre=/sbin/swapoff -a
