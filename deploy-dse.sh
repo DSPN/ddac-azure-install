@@ -12,3 +12,4 @@ wait $dir_process_id
 dse_init_process_id=$!
 wait $dse_init_process_id
 echo "deploy-dse ------> exit status $?"
+exit 0
