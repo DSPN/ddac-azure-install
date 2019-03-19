@@ -12,8 +12,8 @@ chown cassandra:cassandra /usr/share/dse
 cd /usr/share/dse
 # install DDAC
 tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1 &
-tar_process_id=$!
-wait $tar_process_id
+dseinit_tar_process_id=$!
+wait $dseinit_tar_process_id
 echo ddactar exited with status $?
 
 chown -R cassandra:cassandra /usr/share/dse
