@@ -3,6 +3,7 @@
 # 2nd param is datacenter
 # 3rd param are seed nodes
 #
+echo "dse-init starting"
 cluster_name=$1
 dc=$2
 seeds=$3
@@ -11,7 +12,7 @@ mkdir /usr/share/dse
 chown cassandra:cassandra /usr/share/dse
 cd /usr/share/dse
 # install DDAC
-tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1 &
+tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1
 dseinit_tar_process_id=$!
 wait $dseinit_tar_process_id
 echo ddactar exited with status $?
@@ -25,13 +26,13 @@ fi
 privip=`echo $(hostname -I)`
 
 # set cassandra.yaml properties
-/home/ddac/ddac-azure-install/dse-vm-cassandra-props.sh $seeds $cluster_name $privip &
+/home/ddac/ddac-azure-install/dse-vm-cassandra-props.sh $seeds $cluster_name $privip 
 cprops_process_id=$!
 wait $cprops_process_id
 echo cassprops exited with status $?
 
 # set cassandra-rackdc.yaml properties
-/home/ddac/ddac-azure-install/dse-vm-rack-props.sh $dc &
+/home/ddac/ddac-azure-install/dse-vm-rack-props.sh $dc 
 rack_process_id=$!
 wait $rack_process_id
 echo rackprops exited with status $?
