@@ -9,10 +9,9 @@ dc=$2
 seeds=$3
 # create dir where DDAC will live
 mkdir /usr/share/dse
-chown cassandra:cassandra /usr/share/dse
 cd /usr/share/dse
 # install DDAC
-tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1
+tar -xvf /home/ddac/ddac-5.1.12-bin.tar.gz  --strip-components=1 &
 dseinit_tar_process_id=$!
 wait $dseinit_tar_process_id
 echo ddactar exited with status $?
@@ -26,13 +25,13 @@ fi
 privip=`echo $(hostname -I)`
 
 # set cassandra.yaml properties
-/home/ddac/ddac-azure-install/dse-vm-cassandra-props.sh $seeds $cluster_name $privip 
+/home/ddac/ddac-azure-install/dse-vm-cassandra-props.sh $seeds $cluster_name $privip &
 cprops_process_id=$!
 wait $cprops_process_id
 echo cassprops exited with status $?
 
 # set cassandra-rackdc.yaml properties
-/home/ddac/ddac-azure-install/dse-vm-rack-props.sh $dc 
+/home/ddac/ddac-azure-install/dse-vm-rack-props.sh $dc &
 rack_process_id=$!
 wait $rack_process_id
 echo rackprops exited with status $?
@@ -45,13 +44,13 @@ sed -e 's|PATH="\(.*\)"|PATH="/usr/share/dse/bin:/usr/share/dse/tools/bin:\1"|g'
 # start DDAC on node
 cp /home/ddac/ddac-azure-install/cassandra.service /etc/systemd/system
 
-systemctl enable cassandra
+systemctl enable cassandra &
 casseenable_process_id=$!
 wait $casseenable_process_id
 echo cassenable exited with status $?
 
-echo "cassandra starting"
-systemctl start cassandra 
+echo "cassandra starting" 
+systemctl start cassandra &
 cassstart_process_id=$!
 wait $cassstart_process_id
 echo cassstart exited with status $?
